@@ -11,6 +11,7 @@ import ZIndex from "./ZIndex";
 import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
+import ReactIconsSampler from "./ReactIcons";
 export default function Lab2() {
   return (
     <div id="wd-lab2">
@@ -56,42 +57,43 @@ export default function Lab2() {
         </div>
       </div>
       <div>
-        <div>
-          <ForegroundColors />
-        </div>
-        <div>
-          <BackgroundColors />
-        </div>
-        <div>
-          <Borders />
-        </div>
-        <div>
-          <Padding />
-        </div>
-        <div>
-          <Margins />
-        </div>
-        <div>
-          <Corners />
-        </div>
-        <div>
-          <Dimensions />
-        </div>
-        <div>
-          <Positions />
-        </div>
-        <div>
-          <ZIndex />
-        </div>
-        <div>
-          <Float />
-        </div>
-        <div>
-          <GridLayout />
-        </div>
-        <div>
-          <Flex />
-        </div>
+        <ForegroundColors />
+      </div>
+      <div>
+        <BackgroundColors />
+      </div>
+      <div>
+        <Borders />
+      </div>
+      <div>
+        <Padding />
+      </div>
+      <div>
+        <Margins />
+      </div>
+      <div>
+        <Corners />
+      </div>
+      <div>
+        <Dimensions />
+      </div>
+      <div>
+        <Positions />
+      </div>
+      <div>
+        <ZIndex />
+      </div>
+      <div>
+        <Float />
+      </div>
+      <div>
+        <GridLayout />
+      </div>
+      <div>
+        <Flex />
+      </div>
+      <div>
+        <ReactIconsSampler />
       </div>
     </div>
   );
