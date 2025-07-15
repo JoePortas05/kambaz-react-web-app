@@ -7,14 +7,21 @@ import Margins from "./Margins";
 import Corners from "./Corners";
 import Dimensions from "./Dimensions";
 import Positions from "./Positions";
-import ZIndex from "./ZIndex";
+import ZIndex from "./Zindex";
 import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
+import Container from "react-bootstrap/Container";
+import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapNavigation from "./BootstrapNavigation";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapLists from "./BootstrapLists";
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    <Container>
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <p>
@@ -95,6 +102,24 @@ export default function Lab2() {
       <div>
         <ReactIconsSampler />
       </div>
-    </div>
+      <div>
+        <BootstrapGrids />
+      </div>
+      <div>
+        <ScreenSizeLabel />
+      </div>
+      <div>
+        <BootstrapTables />
+      </div>
+      <div>
+        <BootstrapLists />
+      </div>
+      <div>
+        <BootstrapForms />
+      </div>
+      <div>
+        <BootstrapNavigation />
+      </div>
+    </Container>
   );
 }
