@@ -7,8 +7,6 @@ import db from "../../Database";
 
 export default function Assignments() {
   const { cid } = useParams();
-  console.log("CID is:", cid);
-  console.log("Assignments:", db.assignments);
 
   const assignments = db.assignments;
   return (
@@ -63,15 +61,15 @@ export default function Assignments() {
                     <BsGripVertical />
 
                     <Link
-                      to="123"
+                      to={assignment._id}
                       className="wd-assignment-link fw-bold text-decoration-none text-dark"
                     >
                       {assignment.title}
                     </Link>
                     <br />
                     <small className="text-muted">
-                      Multiple Modules | Not available until July 9 12:00 AM |
-                      Due July 11 11:59 PM | 100 pts
+                      {assignment.modules}| {assignment.available}|{" "}
+                      {assignment.due} | {assignment.points}
                     </small>
                   </div>
                   <LessonControlButtons />

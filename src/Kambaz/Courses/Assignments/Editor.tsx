@@ -1,15 +1,29 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
+import db from "../../Database";
+import { useParams } from "react-router";
 
 export default function AssignmentEditor() {
+  const { cid, aid } = useParams();
+  const assignment = db.assignments.find(
+    (a: any) => a._id === aid && a.course === cid
+  );
+  console.log("CID:", cid);
+  console.log("AID:", aid);
+  console.log("Assignments DB:", db.assignments);
+
   return (
     <div id="wd-assignments-editor">
       <Form.Group className="mb-3" controlId="wd-name">
         <Form.Label className="fw-bold">Assignment Name</Form.Label>
-        <Form.Control defaultValue="A1" />
+        <Form.Control defaultValue={assignment?.title} />
       </Form.Group>
 
       <Form.Group className="mb-4" controlId="wd-description">
-        <Form.Control as="textarea" defaultValue="Desc" rows={5} />
+        <Form.Control
+          as="textarea"
+          defaultValue={assignment?.description}
+          rows={5}
+        />
       </Form.Group>
 
       <Row className="mb-3 align-items-center">
@@ -17,7 +31,11 @@ export default function AssignmentEditor() {
           <Form.Label className="mb-0">Points</Form.Label>
         </Col>
         <Col sm={4}>
-          <Form.Control id="wd-points" type="number" defaultValue={100} />
+          <Form.Control
+            id="wd-points"
+            type="number"
+            defaultValue={assignment?.points}
+          />
         </Col>
       </Row>
 
@@ -83,14 +101,17 @@ export default function AssignmentEditor() {
               <Col sm={4}>
                 <Form.Control
                   type="datetime-local"
-                  defaultValue="2025-07-13T23:59"
+                  defaultValue={assignment?.due}
                 />
               </Col>
             </Form.Group>
             <Row className="mb-4">
               <Col sm={3}>
                 <Form.Label className="fw-bold">Available from</Form.Label>
-                <Form.Control type="date" defaultValue="2025-07-06" />
+                <Form.Control
+                  type="date"
+                  defaultValue={assignment?.available}
+                />
               </Col>
               <Col sm={3}>
                 <Form.Label className="fw-bold">Until</Form.Label>
