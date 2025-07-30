@@ -84,9 +84,6 @@ export default function Assignments() {
                     </small>
                   </div>
                   <BsTrash
-                    className="ms-2"
-                    size={15}
-                    role="button"
                     onClick={() => dispatch(deleteAssignment(assignment._id))}
                   />
                   <LessonControlButtons />
