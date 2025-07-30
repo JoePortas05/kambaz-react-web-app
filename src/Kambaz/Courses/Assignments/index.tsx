@@ -1,9 +1,9 @@
 import { Row, Col, Form, InputGroup, Button, ListGroup } from "react-bootstrap";
 import { BsCaretDownFill, BsGripVertical, BsSearch } from "react-icons/bs";
 import { Link, useParams } from "react-router";
-import ModuleControlButtons from "../Modules/ModuleControlButtons";
 import LessonControlButtons from "../Modules/LessonControlButtons";
 import db from "../../Database";
+import ProtectedFaculty from "../../Account/ProtectedFaculty";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -31,9 +31,11 @@ export default function Assignments() {
           >
             + Group
           </Button>
-          <Button id="wd-add-assignment" variant="danger">
-            + Assignment
-          </Button>
+          <ProtectedFaculty>
+            <Button id="wd-add-assignment" variant="danger">
+              + Assignment
+            </Button>
+          </ProtectedFaculty>
         </Col>
       </Row>
 
@@ -47,7 +49,6 @@ export default function Assignments() {
               <BsCaretDownFill />
             </div>
             <span className="badge bg-light text-dark">40% of Total</span>
-            <ModuleControlButtons />
           </div>
         </ListGroup.Item>
 
