@@ -2,13 +2,17 @@ import { Row, Col, Form, InputGroup, Button, ListGroup } from "react-bootstrap";
 import { BsCaretDownFill, BsGripVertical, BsSearch } from "react-icons/bs";
 import { Link, useParams } from "react-router";
 import LessonControlButtons from "../Modules/LessonControlButtons";
-import db from "../../Database";
 import ProtectedFaculty from "../../Account/ProtectedFaculty";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { BsTrash } from "react-icons/bs";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const { cid } = useParams();
-
-  const assignments = db.assignments;
+  const { assignments } = useSelector((state: any) => state.assignmentReducer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div id="wd-assignments">
       <Row className="align-items-center mb-3">
@@ -32,7 +36,13 @@ export default function Assignments() {
             + Group
           </Button>
           <ProtectedFaculty>
-            <Button id="wd-add-assignment" variant="danger">
+            <Button
+              id="wd-add-assignment"
+              variant="danger"
+              onClick={() =>
+                navigate(`/Kambaz/Courses/${cid}/Assignments/Editor`)
+              }
+            >
               + Assignment
             </Button>
           </ProtectedFaculty>
@@ -53,7 +63,7 @@ export default function Assignments() {
         </ListGroup.Item>
 
         {assignments
-          .filter((assignment) => assignment.course === cid)
+          .filter((assignment: any) => assignment.course === cid)
           .map((assignment: any) => (
             <div key={assignment._id}>
               <ListGroup.Item className="wd-left-border-success p-2">
@@ -73,6 +83,12 @@ export default function Assignments() {
                       {assignment.due} | {assignment.points}
                     </small>
                   </div>
+                  <BsTrash
+                    className="ms-2 text-danger"
+                    size={18}
+                    role="button"
+                    onClick={() => dispatch(deleteAssignment(assignment._id))}
+                  />
                   <LessonControlButtons />
                 </div>
               </ListGroup.Item>
