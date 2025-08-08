@@ -1,6 +1,5 @@
 import Database from "../Database/index.js";
 import { v4 as uuidv4 } from "uuid";
-import Database from "../Database/index.js";
 
 export function findAllCourses() {
 return Database.courses;

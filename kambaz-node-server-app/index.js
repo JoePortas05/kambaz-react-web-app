@@ -12,6 +12,8 @@ import CourseRoutes from "./Kambaz/Courses/routes.js";
 
 import ModuleRoutes from "./Kambaz/Modules/routes.js";
 
+//import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
+
 const app = express();
 
 app.use(cors(cors({
@@ -35,7 +37,7 @@ app.use(session(sessionOptions));
 app.use(express.json());
 UserRoutes(app);
 CourseRoutes(app);
-EnrollmentRoutes(app);
+//EnrollmentRoutes(app);
 ModuleRoutes(app);
 Hello(app);
 Lab5(app);
