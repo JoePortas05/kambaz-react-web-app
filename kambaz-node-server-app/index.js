@@ -16,10 +16,10 @@ import ModuleRoutes from "./Kambaz/Modules/routes.js";
 
 const app = express();
 
-app.use(cors(cors({
+app.use(cors({
 credentials: true,
 origin: process.env.NETLIFY_URL || "http://localhost:5173",
-})));
+}));
 const sessionOptions = {
 secret: process.env.SESSION_SECRET || "kambaz",
 resave: false,
