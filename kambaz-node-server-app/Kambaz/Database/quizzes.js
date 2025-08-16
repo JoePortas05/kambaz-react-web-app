@@ -1,0 +1,23 @@
+export default [
+  {
+    _id: "A101",
+    description: "Quiz 1",
+    title: "Propulsion Assignment",
+    course: "RS101",
+    type: "Graded Quiz",
+    points: 100,
+    assignment_group: "Exams",
+    shuffle_answers: true,
+    time_limit: 20,
+    multiple_attempts: true,
+    how_many_attempts: "2",
+    show_correct_answers: true,
+    access_code: "1",
+    one_question_at_a_time: true,
+    webcam_required: true,
+    lock_questions_after_answering: true,
+    due: "01/05/2026",
+    available: "01/01/2026",
+    until: "01/05/2026",
+  },
+];
