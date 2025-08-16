@@ -98,7 +98,7 @@ export default function UserRoutes(app) {
   };
 
   const updateUser = async (req, res) => {
-    const userId = req.params.userId;
+    const { userId } = req.params;
     const userUpdates = req.body;
     await dao.updateUser(userId, userUpdates);
     const currentUser = req.session["currentUser"];
@@ -114,7 +114,8 @@ export default function UserRoutes(app) {
       res.status(400).json({ message: "Username already in use" });
       return;
     }
-    currentUser = await dao.createUser(req.body);
+    const currentUser = await dao.createUser(req.body);
+    req.session["currentUser"] = currentUser;
     res.json(currentUser);
   };
 
@@ -123,10 +124,10 @@ export default function UserRoutes(app) {
     const currentUser = await dao.findUserByCredentials(username, password);
     if (currentUser) {
       req.session["currentUser"] = currentUser;
+      res.json(currentUser);
     } else {
       res.status(401).json({ message: "Unable to login. Try again later." });
     }
-    res.json(currentUser);
   };
 
   const signout = async (req, res) => {
