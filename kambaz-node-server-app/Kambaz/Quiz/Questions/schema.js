@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const MCQChoiceSchema = new mongoose.Schema({
   text: String,
-  correct: Boolean,
+  correct: Number,
 });
 
 const multipleChoiceSchema = new mongoose.Schema({
@@ -14,7 +14,7 @@ const trueFalseSchema = new mongoose.Schema({
 });
 
 const fillInBlankSchema = new mongoose.Schema({
-  answers: [String],
+  answer: String,
 });
 
 const questionSchema = new mongoose.Schema(
@@ -24,7 +24,7 @@ const questionSchema = new mongoose.Schema(
     question: String,
     type: {
       type: String,
-      enum: ["Short Answer", "Fill In The Blank", "Multiple Choice"],
+      enum: ["True Or False", "Fill In The Blank", "Multiple Choice"],
       default: "Multiple Choice",
     },
     points: Number,

@@ -1,10 +1,10 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router";
-import { addQuiz } from "../Quizzes/reducer";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router";
+import { addQuiz } from "./reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-export default function QuestionsEditor() {
+export default function DetailsEditor() {
   const { cid, qid } = useParams();
   console.log(qid);
 
@@ -63,8 +63,32 @@ export default function QuestionsEditor() {
     navigate(`/Kambaz/Courses/${cid}/Quizzes`);
   };
 
+  const { pathname } = useLocation();
+  const details = pathname.replace(
+    /\/Editor\/questions(?:\/|$)/,
+    "/Editor/details"
+  );
+  const questions = pathname.replace(
+    /\/Editor\/details(?:\/|$)/,
+    "/Editor/questions"
+  );
+
   return (
     <div id="wd-quizzes-editor">
+      <div>
+        <ul>
+          <li>
+            <NavLink className="nav-link" to={details}>
+              Details
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-link" to={questions}>
+              Questions
+            </NavLink>
+          </li>
+        </ul>
+      </div>
       <Form.Group className="mb-3" controlId="wd-name">
         <Form.Label className="fw-bold">Quiz Name</Form.Label>
         <Form.Control
