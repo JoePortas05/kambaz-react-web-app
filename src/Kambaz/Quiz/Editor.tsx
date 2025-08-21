@@ -1,8 +1,8 @@
 import { NavLink, useParams } from "react-router";
 
-export default function QuizzesEditor() {
+export default function Editor() {
   const { cid, qid } = useParams();
-  const editor = `/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`;
+  const editor = `/Kambaz/Courses/${cid}/Quizzes/${qid}/Edit`;
   return (
     <div>
       <ul>

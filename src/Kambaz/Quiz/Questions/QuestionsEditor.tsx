@@ -1,6 +1,6 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
-import { addQuiz } from "./reducer";
+import { addQuiz } from "../Quizzes/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 

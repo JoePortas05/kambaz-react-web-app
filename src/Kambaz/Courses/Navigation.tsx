@@ -25,6 +25,9 @@ export default function CourseNavigation() {
           {page}{" "}
         </Link>
       ))}
+      <Link to={`/Kambaz/Courses/${cid}/Quizzes`} id="wd-course-quizzes-link">
+        Quizzes
+      </Link>
     </div>
   );
 }

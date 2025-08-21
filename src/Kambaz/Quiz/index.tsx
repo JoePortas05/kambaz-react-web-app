@@ -1,18 +1,35 @@
 import { Row, Col, Form, InputGroup, Button, ListGroup } from "react-bootstrap";
 import { BsCaretDownFill, BsGripVertical, BsSearch } from "react-icons/bs";
-import { Link, useParams } from "react-router";
-import LessonControlButtons from "../Modules/LessonControlButtons";
-import ProtectedFaculty from "../../Account/ProtectedFaculty";
+import { Link, useParams } from "react-router-dom";
+import LessonControlButtons from "../Courses/Modules/LessonControlButtons";
+import ProtectedFaculty from "../Account/ProtectedFaculty";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BsTrash } from "react-icons/bs";
-import { deleteQuiz } from "./reducer";
+import * as quizzesClient from "./Quizzes/client";
+import { setQuizzes, deleteQuiz } from "./Quizzes/reducer";
+import { useEffect } from "react";
+import ProtectedStudent from "../Account/ProtectedStudent";
 
 export default function Quizzes() {
   const { cid } = useParams();
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const deleteQuizHandler = async (quizId: string) => {
+    await quizzesClient.deleteQuiz(quizId);
+    dispatch(deleteQuiz(quizId));
+  };
+
+  const fetchQuizzesForCourse = async () => {
+    const quizzes = await quizzesClient.getQuizzes(cid!);
+    dispatch(setQuizzes(quizzes));
+  };
+  useEffect(() => {
+    fetchQuizzesForCourse();
+  }, [cid]);
+
   return (
     <div id="wd-quizzes">
       <Row className="align-items-center mb-3">
@@ -25,9 +42,6 @@ export default function Quizzes() {
           </InputGroup>
         </Col>
         <Col className="d-flex ms-auto" md="auto">
-          <Button id="wd-add-quiz-group" variant="secondary" className="me-2">
-            + Group
-          </Button>
           <ProtectedFaculty>
             <Button
               id="wd-add-quiz"
@@ -63,19 +77,49 @@ export default function Quizzes() {
                     <BsGripVertical />
 
                     <Link
-                      to={quiz._id}
+                      to={`/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/Details`}
                       className="wd-quiz-link fw-bold text-decoration-none text-dark"
                     >
                       {quiz.title}
                     </Link>
                     <br />
                     <small className="text-muted">
-                      {quiz.modules}| {quiz.available}| {quiz.due} |{" "}
-                      {quiz.points}
+                      {quiz.available}| {quiz.due} | {quiz.points}
                     </small>
                   </div>
-                  <BsTrash onClick={() => dispatch(deleteQuiz(quiz._id))} />
-                  <LessonControlButtons />
+                  <ProtectedFaculty>
+                    <BsTrash onClick={() => deleteQuizHandler(quiz._id)} />
+                    <LessonControlButtons />
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/Editor/details`
+                        )
+                      }
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/Preview`
+                        )
+                      }
+                    >
+                      Preview
+                    </Button>
+                  </ProtectedFaculty>
+                  <ProtectedStudent>
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/Kambaz/Courses/${cid}/Quizzes/${quiz._id}/Active/1`
+                        )
+                      }
+                    >
+                      Start
+                    </Button>
+                  </ProtectedStudent>
                 </div>
               </ListGroup.Item>
             </div>
